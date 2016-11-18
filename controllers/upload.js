@@ -33,14 +33,15 @@ router.post('/api/upload', function (req, res, next) {
     })
 
     function saveBooks (content, bookPath) {
+      var coverPath = '/uploads/images/' + bookPath.split('/uploads/').pop() + '-001-000.png'
       if (content.length) {
-        content[0].list.push(bookPath)
+        content[0].list.push([bookPath, coverPath])
         content[0].save(function (err) {
           if (err) return console.error(err)
           return getCover(bookPath)
         })
       } else {
-        var book = new Book({email: email, list: [bookPath]})
+        var book = new Book({email: email, list: [[bookPath, coverPath]]})
         book.save(function (err, content) {
           if (err) return console.error(err)
           return getCover(bookPath)
