@@ -24,50 +24,32 @@ router.post('/api/upload', function (req, res, next) {
       if (Array.isArray(files.userBooks)) {
         files.userBooks.forEach(function (item, index) {
           var bookPath = item.path.split('LibreRead')[1]
-          console.log(bookPath)
-          if (content.length) {
-            content[0].list.push(bookPath)
-            content[0].save(function (err) {
-              if (err) return console.error(err)
-              console.log('books added successfully')
-              return getCover(bookPath)
-            })
-          } else {
-            var book = new Book({email: email, list: [bookPath]})
-            book.save(function (err, content) {
-              if (err) return console.error(err)
-              console.log(content)
-              console.log('books added successfully')
-              return getCover(bookPath)
-            })
-          }
+          saveBooks(content, bookPath)
         })
       } else {
         var bookPath = files.userBooks.path.split('LibreRead')[1]
-        console.log(bookPath)
-        console.log(content)
-        if (content.length) {
-          content[0].list.push(bookPath)
-          content[0].save(function (err) {
-            if (err) return console.error(err)
-            console.log('books added successfully')
-            return getCover(bookPath)
-          })
-        } else {
-          var book = new Book({email: email, list: [bookPath]})
-          book.save(function (err, content) {
-            if (err) return console.error(err)
-            console.log(content)
-            console.log('books added successfully')
-            return getCover(bookPath)
-          })
-        }
+        saveBooks(content, bookPath)
       }
     })
 
+    function saveBooks (content, bookPath) {
+      if (content.length) {
+        content[0].list.push(bookPath)
+        content[0].save(function (err) {
+          if (err) return console.error(err)
+          return getCover(bookPath)
+        })
+      } else {
+        var book = new Book({email: email, list: [bookPath]})
+        book.save(function (err, content) {
+          if (err) return console.error(err)
+          return getCover(bookPath)
+        })
+      }
+    }
+
     function getCover (bookPath) {
       var cmd = 'pdfimages -p -png -f 1 -l 2 ' + uploadDir2 + bookPath + ' ' + imageDir + bookPath.split('/uploads/').pop()
-      console.log(cmd)
       exec(cmd, function (err, stdout, stderr) {
         if (err) return console.error(err)
         console.log(stdout)
