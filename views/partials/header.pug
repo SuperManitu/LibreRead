@@ -16,3 +16,10 @@ header
       div.p-dropdown
         a(href='/account') My Account
         a(href='/logout') Logout
+
+      div.upload-books Upload new books
+      form#uploadForm(enctype='multipart/form-data', action='/api/upload', method='post')
+        input(type='hidden', name='_csrf', value=_csrf)
+        input(type='file', id='uploadFile' name='userBooks', multiple)
+        input(type='submit', id="uploadFileSubmit" value='Upload books', name='submit')
+        span#status

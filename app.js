@@ -34,6 +34,7 @@ dotenv.load({ path: '.env.example' });
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const contactController = require('./controllers/contact');
+const uploadController = require('./controllers/upload');
 
 /**
  * API keys and Passport configuration.
@@ -112,6 +113,10 @@ app.use((req, res, next) => {
 });
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 
+// For uploading ebooks and covers
+app.use('/uploads/images/',express.static(path.join(__dirname, '/uploads/images/')));
+app.use('/uploads/',express.static(path.join(__dirname, '/uploads/')));
+
 /**
  * Primary app routes.
  */
@@ -132,6 +137,7 @@ app.post('/account/profile', passportConfig.isAuthenticated, userController.post
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+app.post('/api/upload', passportConfig.isAuthenticated, uploadController);
 
 
 /**

@@ -59,3 +59,13 @@ header {
       padding: 0; }
       .user .p-dropdown a:last-child {
         margin-bottom: 0; }
+
+.upload-books {
+  float: right;
+  margin-right: 50px;
+  background: #e4853a;
+  color: white;
+  margin-top: 3px;
+  padding: 7px 10px;
+  border-radius: 2px;
+  cursor: pointer; }
