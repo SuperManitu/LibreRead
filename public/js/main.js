@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
-  // Place JavaScript code here...
+  $('.profile').click(function() {
+    $('.p-dropdown').toggle()
+  })
 
-});
+})

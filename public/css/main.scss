@@ -1,70 +1,86 @@
-@import "themes/default/variables";
-
-@import "lib/bootstrap/bootstrap";
-@import "lib/font-awesome/font-awesome";
-
-@import "themes/default/default";
-
-// Scaffolding
-// -------------------------
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  padding-top: 60px;
-  margin-bottom: 75px;
+  background: #F3F3F3;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 14px;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 45px;
-  line-height: 45px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  p, ul {
-    margin-bottom: 0;
+header {
+  width: 100%;
+  height: 40px;
+  background: white;
+  border-bottom: 1px solid #D0D0D0;
+  padding: 0 50px;
+}
+
+.logo {
+  float: left;
+  font-family: 'PT Sans Caption', sans-serif;
+  font-size: 17px;
+  padding-top: 8px;
+
+  span.c {
+    color: #328F7D;
+  }
+
+  span.n {
+    color: #525252;
   }
 }
 
-// Input Fields
-// -------------------------
+.user {
+  float: right;
 
-textarea {
-  resize: vertical;
-}
+  a {
+    float: left;
+    color: #444;
+    text-decoration: none;
+    margin-right: 20px;
+    padding-top: 8px;
 
-// Navbar
-// -------------------------
+    &:hover {
+      text-decoration: underline;
+    }
 
-.navbar-nav img {
-  width: 30px;
-  height: 30px;
-  margin: -15px 15px -15px;
-}
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 
-// Alerts
-// -------------------------
+  img {
+    float: left;
+    width: 24px;
+    height: 24px;
+    margin-top: 8px;
+    border-radius: 100%;
+  }
 
-.alert {
-  margin-top: 20px;
-}
+  span.profile {
+    float: left;
+    margin: 11px 0 0 5px;
+    cursor: pointer;
+  }
 
-// Thumbnails
-// -------------------------
+  .p-dropdown {
+    display: none;
+    background: white;
+    margin-top: 40px;
+    padding: 10px 20px;
 
-.thumbnail {
-  padding: 0;
-  border-radius: 0;
-  box-shadow: 0 0 5px #ccc, inset 0 0 0 #000;
-}
+    a {
+      float: none;
+      display: block;
+      margin: 0 0 10px 0;
+      padding: 0;
 
-// Font Icons
-// -------------------------
-
-.fa {
-  margin-right: 6px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
