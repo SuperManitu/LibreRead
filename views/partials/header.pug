@@ -18,7 +18,7 @@ header
         a(href='/logout') Logout
 
       div.upload-books Upload new books
-      form#uploadForm(enctype='multipart/form-data', action='/api/upload', method='post')
+      form#uploadForm(enctype='multipart/form-data', action='/api/upload', method='post', style='display: none;')
         input(type='hidden', name='_csrf', value=_csrf)
         input(type='file', id='uploadFile' name='userBooks', multiple)
         input(type='submit', id="uploadFileSubmit" value='Upload books', name='submit')

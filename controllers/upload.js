@@ -1,17 +1,14 @@
-var express = require('express');
-var formidable = require('formidable');
-var passport = require('passport');
-var Book = require('../models/book');
-var router = express.Router();
-var path = require('path');
-var uploadDir = path.join(__dirname, '/../uploads/');
-var imageDir = path.join(__dirname, '/../uploads/images/');
-var exec = require('child_process').exec;
-
+var express = require('express')
+var formidable = require('formidable')
+var Book = require('../models/book')
+var router = express.Router()
+var path = require('path')
+var uploadDir = path.join(__dirname, '/../uploads/')
+var imageDir = path.join(__dirname, '/../uploads/images/')
+var exec = require('child_process').exec
 
 router.post('/api/upload', function (req, res, next) {
-  console.log('coming');
-  var username = req.user.username
+  var email = req.user.email
   var form = new formidable.IncomingForm()
   form.multiples = true
   form.keepExtensions = true
@@ -26,6 +23,6 @@ router.post('/api/upload', function (req, res, next) {
     const [fileName, fileExt] = file.name.split('.')
     file.path = path.join(uploadDir, `${fileName}_${new Date().getTime()}.${fileExt}`)
   })
-});
+})
 
-module.exports = router;
+module.exports = router
