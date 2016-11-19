@@ -11,6 +11,9 @@ body {
 }
 
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 40px;
   background: white;
@@ -94,4 +97,24 @@ header {
   padding: 7px 10px;
   border-radius: 2px;
   cursor: pointer;
+}
+
+.library {
+  padding: 50px;
+
+  .book-link {
+    margin-right: 50px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+#bookFrame {
+  display: none;
+  position: absolute;
+  top: 38px;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

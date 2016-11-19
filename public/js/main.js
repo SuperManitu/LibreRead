@@ -23,4 +23,11 @@ $(document).ready(function () {
     })
     return false
   })
+
+  $('.book-link').click(function (e) {
+    e.preventDefault()
+    var bookPath = $(this).attr('href')
+    $('.library').hide()
+    $('#bookFrame').attr('src', bookPath).show()
+  })
 })

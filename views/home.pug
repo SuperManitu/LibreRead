@@ -1,6 +1,8 @@
 extends layout
 
 block content
-  each book in books
-    a(href=book[0])
-      img(src=book[1], width='140px', height='164px')
+  div.library
+    each book in books
+      a(href=book[0], class='book-link')
+        img(src=book[1], width='140px', height='164px')
+  iframe(src='', id='bookFrame')

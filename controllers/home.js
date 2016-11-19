@@ -6,21 +6,23 @@ var Book = require('../models/book')
  */
 exports.index = (req, res) => {
   if (req.user) {
+    // Book.find({email: req.user.email}).remove().exec()
     Book.find({email: req.user.email}, function (err, content) {
       if (err) return console.error(err)
+      console.log(content[0])
       if (content[0]) {
-        res.render('home', {
-          books: content[0].list
-        })
+        return resRender(res, content[0].list)
       } else {
-        res.render('home', {
-          books: []
-        })
+        return resRender(res, [])
       }
     })
   } else {
-    res.render('home', {
-      books: []
-    })
+    return resRender(res, [])
   }
+}
+
+function resRender (res, books) {
+  return res.render('home', {
+    books: books
+  })
 }
