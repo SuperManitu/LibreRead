@@ -5,4 +5,4 @@ run:
 	@docker run libreread
 
 run-dev:
-	@docker run -v $(CURDIR):/root/LibreRead libreread 
+	@docker run -v $(CURDIR):/LibreRead libreread 
