@@ -9,7 +9,7 @@ exports.index = (req, res) => {
     // Book.find({email: req.user.email}).remove().exec()
     Book.find({email: req.user.email}, function (err, content) {
       if (err) return console.error(err)
-      console.log(content[0])
+      console.log(content)
       if (content[0]) {
         return resRender(res, content[0].list)
       } else {

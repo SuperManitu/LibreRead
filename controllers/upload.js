@@ -17,41 +17,48 @@ router.post('/api/upload', function (req, res, next) {
 
   form.parse(req, (err, fields, files) => {
     if (err) return res.status(500).json({ error: err })
+    if (Array.isArray(files.userBooks)) {
+      files.userBooks.forEach(function (item, index) {
+        // bookPath.push(item.path.split('LibreRead')[1])
+        item = item.path.split('LibreRead')[1]
+        saveBooks(item)
+        getCover(item)
+      })
+    } else {
+      var item = files.userBooks.path.split('LibreRead')[1]
+      saveBooks(item)
+      getCover(item)
+    }
 
-    Book.find({email: email}, function (err, content) {
-      if (err) return console.error(err)
+    function saveBooks (bookPath) {
+      Book.find({email: req.user.email}, function (err, content) {
+        if (err) console.error(err)
+        var coverPath = '/uploads/images/' + bookPath.split('/uploads/').pop() + '-001-000.png'
+        var list = [{bookPath: bookPath, coverPath: coverPath}]
 
-      if (Array.isArray(files.userBooks)) {
-        files.userBooks.forEach(function (item, index) {
-          var bookPath = item.path.split('LibreRead')[1]
-          saveBooks(content, bookPath)
-        })
-      } else {
-        var bookPath = files.userBooks.path.split('LibreRead')[1]
-        saveBooks(content, bookPath)
-      }
-    })
-
-    function saveBooks (content, bookPath) {
-      var coverPath = '/uploads/images/' + bookPath.split('/uploads/').pop() + '-001-000.png'
-      if (content.length) {
-        content[0].list.push([bookPath, coverPath])
-        content[0].save(function (err) {
-          if (err) return console.error(err)
-          return getCover(bookPath)
-        })
-      } else {
-        var book = new Book({email: email, list: [[bookPath, coverPath]]})
-        book.save(function (err, content) {
-          if (err) return console.error(err)
-          return getCover(bookPath)
-        })
-      }
+        if (!content.length) {
+          console.log('coming')
+          var b = new Book({email: email, list: [list]})
+          return b.save(function (err, content) {
+            if (err) return console.log(err)
+            console.log(content)
+          })
+        } else {
+          console.log('coming 2')
+          content[0].list.push(list)
+          return content[0].save(function (err, content) {
+            if (err) return console.error(err)
+            console.log(content)
+          })
+        }
+      })
     }
 
     function getCover (bookPath) {
+      console.log('\n\n\n\n')
+      console.log(bookPath)
       var cmd = 'pdfimages -p -png -f 1 -l 2 ' + uploadDir2 + bookPath + ' ' + imageDir + bookPath.split('/uploads/').pop()
-      exec(cmd, function (err, stdout, stderr) {
+      return exec(cmd, function (err, stdout, stderr) {
         if (err) return console.error(err)
         console.log(stdout)
       })
