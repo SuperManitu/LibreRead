@@ -37,14 +37,12 @@ router.post('/api/upload', function (req, res, next) {
         var list = [{bookPath: bookPath, coverPath: coverPath}]
 
         if (!content.length) {
-          console.log('coming')
           var b = new Book({email: email, list: [list]})
           return b.save(function (err, content) {
             if (err) return console.log(err)
             console.log(content)
           })
         } else {
-          console.log('coming 2')
           content[0].list.push(list)
           return content[0].save(function (err, content) {
             if (err) return console.error(err)
@@ -55,8 +53,6 @@ router.post('/api/upload', function (req, res, next) {
     }
 
     function getCover (bookPath) {
-      console.log('\n\n\n\n')
-      console.log(bookPath)
       var cmd = 'pdfimages -p -png -f 1 -l 2 ' + uploadDir2 + bookPath + ' ' + imageDir + bookPath.split('/uploads/').pop()
       return exec(cmd, function (err, stdout, stderr) {
         if (err) return console.error(err)
