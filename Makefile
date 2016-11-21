@@ -1,5 +1,8 @@
 build:
-	@docker build docker
+	@docker build docker -t libreread
 
 run:
-	@docker run LibreRead
+	@docker run libreread
+
+run-dev:
+	@docker run -v $(CURDIR):/root/LibreRead libreread 
