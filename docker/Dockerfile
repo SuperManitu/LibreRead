@@ -15,4 +15,10 @@ WORKDIR /LibreRead
 
 RUN npm i
 
-CMD ["npm", "start"]
+RUN echo "#!/bin/bash" > /start.sh
+RUN echo "mongod --fork --syslog && npm start" >> /start.sh
+RUN chmod a+x /start.sh
+
+EXPOSE 3000
+
+CMD ["/start.sh"]
