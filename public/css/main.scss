@@ -103,9 +103,16 @@ header {
   padding: 50px;
 
   .book-link {
+    float: left;
     margin-right: 50px;
+
     &:last-child {
       margin-right: 0;
+    }
+
+    .book-cover {
+      width: auto;
+      height: 150px;
     }
   }
 }

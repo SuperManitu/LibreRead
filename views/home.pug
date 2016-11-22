@@ -3,7 +3,6 @@ extends layout
 block content
   div.library
     each book in books
-      #{book}
-      div #{book[0].bookPath}
-      div #{book[0].coverPath}
+      a(href=book[0].bookPath, class='book-link')
+        img(src=book[0].coverPath, class='book-cover')
   iframe(src='', id='bookFrame')

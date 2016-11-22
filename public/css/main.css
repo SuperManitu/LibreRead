@@ -76,9 +76,13 @@ header {
 .library {
   padding: 50px; }
   .library .book-link {
+    float: left;
     margin-right: 50px; }
     .library .book-link:last-child {
       margin-right: 0; }
+    .library .book-link .book-cover {
+      width: auto;
+      height: 150px; }
 
 #bookFrame {
   display: none;
